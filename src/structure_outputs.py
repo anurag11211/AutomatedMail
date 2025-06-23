@@ -4,7 +4,7 @@ from enum import Enum
 
 # **Categorize Email Output**
 class EmailCategory(str, Enum):
-    product_enquiry = "product_enquiry"
+    campaign = "campaign"
     customer_complaint = "customer_complaint"
     customer_feedback = "customer_feedback"
     unrelated = "unrelated"
