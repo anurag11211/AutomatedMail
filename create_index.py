@@ -49,7 +49,7 @@ rag_chain = (
     | StrOutputParser()
 )
 
-query = "What are your pricing options?"
+query = "What are your pricing options for anurag?"
 result = rag_chain.invoke(query)
 print(f"Question: {query}")
 print(f"Answer: {result}")

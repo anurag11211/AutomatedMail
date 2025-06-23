@@ -12,6 +12,7 @@ class Workflow():
         workflow.add_node("load_inbox_emails", nodes.load_new_emails)
         workflow.add_node("is_email_inbox_empty", nodes.is_email_inbox_empty)
         workflow.add_node("categorize_email", nodes.categorize_email)
+        
         workflow.add_node("construct_rag_queries", nodes.construct_rag_queries)
         workflow.add_node("retrieve_from_rag", nodes.retrieve_from_rag)
         workflow.add_node("email_writer", nodes.write_draft_email)
@@ -38,8 +39,8 @@ class Workflow():
             "categorize_email",
             nodes.route_email_based_on_category,
             {
-                "product related": "construct_rag_queries",
-                "not product related": "email_writer", # Feedback or Complaint
+                "campaign": "construct_rag_queries",
+                "not campaign related": "email_writer", # Feedback or Complaint
                 "unrelated": "skip_unrelated_email"
             }
         )

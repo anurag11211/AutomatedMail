@@ -26,11 +26,11 @@ class Nodes:
             return "process"
         
     def is_email_inbox_empty(self, state: GraphState) -> GraphState:
-        return state
+        return state    
 
     def categorize_email(self, state: GraphState) -> GraphState:
         """Categorizes the current email using the categorize_email agent."""
-        print(Fore.YELLOW + "Checking email category...\n" + Style.RESET_ALL)
+        print(Fore.YELLOW + "Checking email category..." + Style.RESET_ALL)
         
         # Get the last email
         current_email = state["emails"][-1]
@@ -46,12 +46,12 @@ class Nodes:
         """Routes the email based on its category."""
         print(Fore.YELLOW + "Routing email based on category...\n" + Style.RESET_ALL)
         category = state["email_category"]
-        if category == "product_enquiry":
-            return "product related"
+        if category == "campaign":
+            return "campaign"
         elif category == "unrelated":
             return "unrelated"
         else:
-            return "not product related"
+            return "unrelated"
 
     def construct_rag_queries(self, state: GraphState) -> GraphState:
         """Constructs RAG queries based on the email content."""
@@ -66,10 +66,13 @@ class Nodes:
         print(Fore.YELLOW + "Retrieving information from internal knowledge...\n" + Style.RESET_ALL)
         final_answer = ""
         for query in state["rag_queries"]:
+            print("\n new line for the query",query)
             rag_result = self.agents.generate_rag_answer.invoke(query)
+            print("\n new line for the rag result",rag_result)
             final_answer += query + "\n" + rag_result + "\n\n"
-        
+            print("\n new line for the rag final result",rag_result)
         return {"retrieved_documents": final_answer}
+        
 
     def write_draft_email(self, state: GraphState) -> GraphState:
         """Writes a draft email based on the current email and retrieved information."""

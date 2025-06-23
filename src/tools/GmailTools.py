@@ -28,6 +28,7 @@ class GmailToolsClass:
         try:
             # Get recent emails and organize them into threads
             recent_emails = self.fetch_recent_emails(max_results)
+            print("\n new ;ine for the recent emails",recent_emails)
             if not recent_emails: return []
             
             # Get all draft replies
